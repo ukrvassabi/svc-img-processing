@@ -1,0 +1,2 @@
+recursive-include svc
+recursive-exclude svc/tests *

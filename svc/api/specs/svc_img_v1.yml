@@ -1,0 +1,101 @@
+swagger: '2.0'
+info:
+  title: Image Processing Service API
+  description: Image Processing Service
+  version: 1.0.0
+
+basePath: /api/v1
+
+schemes:
+  - http
+  - https
+
+paths:
+  /upload:
+    post:
+      operationId: upload
+      summary: Uploads image to the service.
+      consumes:
+        - multipart/form-data
+      produces:
+        - application/json
+      parameters:
+        - in: formData
+          name: img
+          type: file
+          description: The file to upload.
+      responses:
+        200:
+          description: Image successfully saved.
+          schema:
+            $ref: "#/definitions/UploadImage"
+        400:
+          description: Failed to save image.
+        default:
+          $ref: "#/responses/UnexpectedError"
+
+  /download/{imageId}:
+    get:
+      operationId: download
+      summary: Downloads image with filter parameters
+      produces:
+        - image/png
+        - image/gif
+        - image/jpeg
+      parameters:
+        - in: path
+          name: imageId
+          type: string
+          required: true
+          description: image UUID
+        - in: query
+          name: zoom
+          type: integer
+          required: true
+          description: represents the requested resolution
+        - in: query
+          name: left
+          type: integer
+          required: true
+          description: left coordinate for requested area
+        - in: query
+          name: top
+          type: integer
+          required: true
+          description: top coordinate for requested area
+        - in: query
+          name: right
+          type: integer
+          required: true
+          description: right coordinate for requested area
+        - in: query
+          name: bottom
+          type: integer
+          required: true
+          description: bottom coordinate for requested area
+      responses:
+        200:
+          description: Returns image file.
+          schema:
+            type: file
+        400:
+          description: Failed to process image.
+        404:
+          description: There is no image with requested image ID.
+        default:
+          $ref: "#/responses/UnexpectedError"
+
+definitions:
+  UploadImage:
+    type: object
+    properties:
+      id:
+        type: string
+        example: "5a5f991d-05be-4754-89fc-fe666b244986"
+        description: UUID of image file stored in service.
+    required:
+      - id
+
+responses:
+  UnexpectedError:
+    description: Unexpected error.

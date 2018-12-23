@@ -1,0 +1,16 @@
+[run]
+branch = False
+omit =
+    svc/__init__.py
+    svc/tests/*
+
+[report]
+omit =
+    svc/__init__.py
+    svc/tests/*
+exclude_lines =
+    pragma: no cover
+    ignore_errors = True
+
+[html]
+directory = coverage_html_report

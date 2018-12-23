@@ -1,0 +1,7 @@
+venv/
+.eggs/
+.pytest_cache/
+*.egg-info
+*.pyc
+.idea/
+.DS_Store

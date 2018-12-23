@@ -1,0 +1,13 @@
+version: '3.1'
+
+services:
+  gunicorn:
+    restart: always
+    build: .
+    ports:
+      - 8082:8022
+    networks:
+      - front-tier
+
+networks:
+  front-tier:
