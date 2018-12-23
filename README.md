@@ -1,5 +1,5 @@
 # Image Processing Service
-
+[![Build Status](https://cloud.drone.io/api/badges/ukrvassabi/svc-img-processing/status.svg)](https://cloud.drone.io/ukrvassabi/svc-img-processing)
 
 ## General information
 Image Processing Service allows you to upload images and download zoomed and cropped images after that.  
